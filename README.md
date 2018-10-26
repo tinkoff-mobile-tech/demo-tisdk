@@ -45,8 +45,8 @@ public class App extends MultiDexApplication {
         InsuranceBuyingEntrance.instance().init(
                 getApplicationContext(),
                 () -> sessionId,
-                BuildConfig.DEBUG,
-                ScanServiceLocator.class
+                false,
+                ServiceLocator.class
         );
     }
 }

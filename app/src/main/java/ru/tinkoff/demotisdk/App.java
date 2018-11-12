@@ -18,6 +18,7 @@ public class App extends MultiDexApplication {
                 getApplicationContext(),
                 () -> sessionId,
                 false,
+                "fines",
                 ServiceLocator.class
         );
     }

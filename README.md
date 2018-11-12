@@ -46,11 +46,13 @@ public class App extends MultiDexApplication {
                 getApplicationContext(),
                 () -> sessionId,
                 false,
+                "fines",
                 ServiceLocator.class
         );
     }
 }
 ```
+"fines" - origin application id.
 
 2) Add entry points to the appropriate sections
 ```Java

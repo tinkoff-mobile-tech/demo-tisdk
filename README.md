@@ -1,5 +1,3 @@
-[![Maven Central][img version shield]][maven]
-
 TISDK
 ===========
 
@@ -27,7 +25,7 @@ android {
 }
 
 dependencies {
-    implementation 'ru.tinkoff.tisdk:tisdk:$latestVersion'
+    implementation 'ru.tinkoff.tisdk:tisdk:1.1.3'
     implementation 'com.android.support:multidex:1.0.3'
 }
 ```
@@ -75,6 +73,3 @@ public class DemoTisdkActivity extends AppCompatActivity {
 
 }
 ```
-
-[img version shield]: https://img.shields.io/maven-central/v/ru.tinkoff.tisdk/tisdk.svg?maxAge=3600
-[maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22ru.tinkoff.tisdk%22

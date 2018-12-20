@@ -3,6 +3,8 @@ TISDK
 
 TISDK - SDK for the sale of insurance in mobile applications.
 
+![Gif](img/steps.gif)
+
 # Installation
 
 1) Add to the `build.gradle` of your project:

@@ -14,7 +14,7 @@ public class App extends MultiDexApplication {
         super.onCreate();
         String sessionId = UUID.randomUUID().toString();
 
-        InsuranceBuyingEntrance.instance().init(
+        InsuranceBuyingEntrance.Companion.instance().init(
                 getApplicationContext(),
                 () -> sessionId,
                 false,

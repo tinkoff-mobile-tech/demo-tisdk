@@ -14,10 +14,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         osago.setOnClickListener {
-            insuranceBuyingEntrance.startOsago(this, null)
+            insuranceBuyingEntrance.startOsago("osagoProcessId", this, null)
         }
         casco.setOnClickListener {
-            insuranceBuyingEntrance.startCasco(this, null)
+            insuranceBuyingEntrance.startCasco("cascoProcessId", this, null)
         }
     }
 }

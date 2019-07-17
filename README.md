@@ -1,3 +1,5 @@
+[![Maven Central][img version shield]][maven]
+
 TISDK
 ===========
 
@@ -24,10 +26,20 @@ android {
     defaultConfig {
         multiDexEnabled true
     }
+    
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+configurations {
+    cleanedAnnotations
+    compile.exclude group: 'org.jetbrains' , module:'annotations'
 }
 
 dependencies {
-    implementation 'ru.tinkoff.tisdk:tisdk:1.1.3'
+    implementation 'ru.tinkoff.tisdk:tisdk:1.2.0'
     implementation 'com.android.support:multidex:1.0.3'
 }
 ```
@@ -35,43 +47,42 @@ dependencies {
 # Usage
 
 1) Initialize InsuranceBuyingEntrance
-```Java
-public class App extends MultiDexApplication {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        String sessionId = UUID.randomUUID().toString();
+```Kotlin
+class App : MultiDexApplication() {
+    override fun onCreate() {
+        super.onCreate()
+        val sessionId = UUID.randomUUID().toString()
 
         InsuranceBuyingEntrance.instance().init(
-                getApplicationContext(),
-                () -> sessionId,
+                applicationContext,
+                SessionProvider { sessionId },
                 false,
                 "fines",
-                ServiceLocator.class
-        );
+                ServiceLocator::class.java
+        )
     }
 }
 ```
 "fines" - origin application id.
 
 2) Add entry points to the appropriate sections
-```Java
-public class DemoTisdkActivity extends AppCompatActivity {
-    private InsuranceBuyingEntrance insuranceBuyingEntrance = InsuranceBuyingEntrance.instance();
+```Kotlin
+class MainActivity : AppCompatActivity() {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demo_tisdk);
+    private val insuranceBuyingEntrance = InsuranceBuyingEntrance.instance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        osago.setOnClickListener {
+            insuranceBuyingEntrance.startOsago("osagoProcessId", this, null)
+        }
+        casco.setOnClickListener {
+            insuranceBuyingEntrance.startCasco("cascoProcessId", this, null)
+        }
     }
-
-    public void onClickOsago(View view) {
-        insuranceBuyingEntrance.startOsago(this, null);
-    }
-
-    public void onClickCasco(View view) {
-        insuranceBuyingEntrance.startCasco(this, null);
-    }
-
 }
 ```
+[img version shield]: https://img.shields.io/maven-central/v/ru.tinkoff.tisdk/tisdk.svg?maxAge=3600
+[maven]: https://search.maven.org/search?q=g:ru.tinkoff.tisdk%20a:tisdk

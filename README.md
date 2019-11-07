@@ -39,8 +39,8 @@ configurations {
 }
 
 dependencies {
-    implementation 'ru.tinkoff.tisdk:tisdk:1.2.2'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'ru.tinkoff.tisdk:tisdk:1.2.9'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 ```
 

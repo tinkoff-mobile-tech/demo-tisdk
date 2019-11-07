@@ -1,6 +1,6 @@
 package ru.tinkoff.demotisdk
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 
 import java.util.UUID
 

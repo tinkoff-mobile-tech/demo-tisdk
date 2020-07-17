@@ -53,17 +53,29 @@ class App : MultiDexApplication() {
         super.onCreate()
         val sessionId = UUID.randomUUID().toString()
 
-        InsuranceBuyingEntrance.instance().init(
-                applicationContext,
-                SessionProvider { sessionId },
-                false,
-                "fines",
-                ServiceLocator::class.java
+        // Инициализация sdk
+        insuranceBuyingEntrance.init(
+                context = applicationContext,
+                sessionProvider = SessionProvider { sessionId },
+                isDebug = false,
+                serviceLocatorClass = ServiceLocator::class.java
         )
+
+        // Настройка партнерской программы
+        insuranceBuyingEntrance
+                .setSource("tisdk_fines")
+                .setOrigin("fines")
+                .setMarketingChannel("broker")
+                .setMarketingSource("broker_systems")
+
+        // Дефолтный обработчик ошибок для RxJava2
+        RxJavaPlugins.setErrorHandler {
+            Logger.e(javaClass.name, it.message)
+        }
     }
 }
 ```
-"fines" - origin application id.
+
 
 2) Add entry points to the appropriate sections
 ```Kotlin
